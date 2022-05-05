@@ -1,4 +1,4 @@
-module github.com/terraform-providers/terraform-provider-external
+module github.com/edgedb/terraform-provider-external
 
 go 1.18
 
