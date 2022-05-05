@@ -33,7 +33,7 @@ func runProgram(ctx context.Context, kind string, d *schema.ResourceData, meta i
 	queryAttr := fmt.Sprintf("query%s", suffix)
 
 	programI := d.Get(programAttr).([]interface{})
-	if programI == nil {
+	if programI == nil || len(programI) == 0 {
 		return nil
 	}
 
