@@ -21,6 +21,14 @@ const (
 )
 
 const testDataSourceConfig_basic = `
+terraform {
+  required_providers {
+    external = {
+      source = "edgedb/external"
+    }
+  }
+}
+
 data "external" "test" {
   program = ["%s", "cheese"]
 
@@ -124,7 +132,7 @@ func TestDataSource_Program_OnlyEmptyString(t *testing.T) {
 						program = [
 							"", # e.g. a variable that became empty
 						]
-				
+
 						query = {
 							value = "valuetest"
 						}
@@ -154,7 +162,7 @@ func TestDataSource_Program_PathAndEmptyString(t *testing.T) {
 							%[1]q,
 							"", # e.g. a variable that became empty
 						]
-				
+
 						query = {
 							value = "valuetest"
 						}
@@ -172,7 +180,7 @@ func buildDataSourceTestProgram() (string, error) {
 	// We have a simple Go program that we use as a stub for testing.
 	cmd := exec.Command(
 		"go", "install",
-		"github.com/terraform-providers/terraform-provider-external/internal/provider/test-programs/tf-acc-external-data-source",
+		"github.com/edgedb/terraform-provider-external/internal/provider/test-programs/tf-acc-external-data-source",
 	)
 	err := cmd.Run()
 
