@@ -87,6 +87,17 @@ func resourceExternal() *schema.Resource {
 					Type: schema.TypeString,
 				},
 			},
+
+			"triggers": {
+				Description: "A map of arbitrary strings that, when changed, " +
+					"will force the resource to be replaced",
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
 		},
 	}
 }
