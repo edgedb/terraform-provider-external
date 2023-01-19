@@ -77,6 +77,7 @@ jobs:
     # See also: https://github.com/hashicorp/setup-terraform/issues/143
     - run: terraform version
     - run: go mod download
+    - run: go build
     - name: TF acceptance tests
       timeout-minutes: 10
       env:
