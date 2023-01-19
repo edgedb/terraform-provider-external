@@ -12,6 +12,8 @@ func TestProvider(t *testing.T) {
 	}
 }
 
-var testProviders = map[string]*schema.Provider{
-	"external": New(),
+var providerFactories = map[string]func() (*schema.Provider, error){
+	"external": func() (*schema.Provider, error) {
+		return New(), nil
+	},
 }

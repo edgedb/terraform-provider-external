@@ -21,14 +21,6 @@ const (
 )
 
 const testDataSourceConfig_basic = `
-terraform {
-  required_providers {
-    external = {
-      source = "edgedb/external"
-    }
-  }
-}
-
 data "external" "test" {
   program = ["%s", "cheese"]
 
@@ -54,7 +46,7 @@ func TestDataSource_basic(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		Providers: testProviders,
+		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: fmt.Sprintf(testDataSourceConfig_basic, programPath),
@@ -111,7 +103,7 @@ func TestDataSource_error(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		Providers: testProviders,
+		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
 				Config:      fmt.Sprintf(testDataSourceConfig_error, programPath),
@@ -124,7 +116,7 @@ func TestDataSource_error(t *testing.T) {
 // Reference: https://github.com/hashicorp/terraform-provider-external/issues/110
 func TestDataSource_Program_OnlyEmptyString(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		Providers: testProviders,
+		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: `
@@ -153,7 +145,7 @@ func TestDataSource_Program_PathAndEmptyString(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		Providers: testProviders,
+		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: fmt.Sprintf(`
@@ -209,7 +201,7 @@ func TestDataSource_20MinuteTimeout(t *testing.T) {
 	}
 
 	resource.UnitTest(t, resource.TestCase{
-		Providers: testProviders,
+		ProviderFactories: providerFactories,
 		Steps: []resource.TestStep{
 			{
 				Config: `
