@@ -30,10 +30,10 @@ jobs:
         with:
           go-version: ${{ needs.go-version.outputs.version }}
       - name: Import GPG key
-        id: import_gpg
-        uses: hashicorp/ghaction-import-gpg@v2.1.0
+        run: |
+          echo -n "$GPG_KEY" | gpg --import
         env:
-          GPG_PRIVATE_KEY: ${{ secrets.RELEASE_BOT_GPG_KEY }}
+          GPG_KEY: ${{ secrets.RELEASE_BOT_GPG_KEY }}
       - name: goreleaser release
         uses: goreleaser/goreleaser-action@v2
         with:
