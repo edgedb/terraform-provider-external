@@ -87,6 +87,17 @@ func resourceExternal() *schema.Resource {
 					Type: schema.TypeString,
 				},
 			},
+
+			"triggers": {
+				Description: "A map of arbitrary strings that, when changed, " +
+					"will force the null resource to be replaced, re-running any associated provisioners.",
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
 		},
 	}
 }
