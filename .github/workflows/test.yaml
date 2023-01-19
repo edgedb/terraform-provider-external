@@ -65,6 +65,15 @@ jobs:
       with:
         terraform_version: ${{ matrix.terraform }}
         terraform_wrapper: false
+    - run: |
+        echo "
+        provider_installation {
+          dev_overrides {
+            \"edgedb/external\" = \"$(pwd)\"
+          }
+          direct {}
+        }
+        " > $HOME/.terraformrc
     # See also: https://github.com/hashicorp/setup-terraform/issues/143
     - run: terraform version
     - run: go mod download
