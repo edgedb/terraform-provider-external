@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func resourceExternal() *schema.Resource {
+func resourceExternal(sensitiveResult bool) *schema.Resource {
 	return &schema.Resource{
 		// This description is used by the documentation generator and the language server.
 		Description: "The `external` resource allows an external program implementing a specific protocol " +
@@ -83,6 +83,7 @@ func resourceExternal() *schema.Resource {
 				Description: "A map of string values returned from the external program.",
 				Type:        schema.TypeMap,
 				Computed:    true,
+				Sensitive:   sensitiveResult,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
