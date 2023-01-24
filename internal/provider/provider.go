@@ -10,7 +10,8 @@ func New() *schema.Provider {
 			"external": dataSource(),
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"external": resourceExternal(),
+			"external":           resourceExternal(false),
+			"external_sensitive": resourceExternal(true),
 		},
 	}
 }
