@@ -64,6 +64,7 @@ func resourceExternal(sensitiveResult bool) *schema.Resource {
 					"arguments. If not supplied, the program will receive an empty object as its input.",
 				Type:     schema.TypeMap,
 				Optional: true,
+				ForceNew: true,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
